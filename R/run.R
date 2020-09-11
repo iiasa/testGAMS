@@ -1,6 +1,5 @@
-# Todo:
-# Invoke a particular GAMS version instead of the on-path GAMS
-# Redirect stderr, stdout, output=<listing file>, gdx=<GDX file>
+# TODO: unvoke a particular GAMS version instead of the on-path GAMS
+# TODO: redirect stderr, stdout, output=<listing file>, gdx=<GDX file>
 
 #' Run a GAMS script for testing.
 #'
@@ -33,3 +32,4 @@ run <- function(path) {
   # Delete the temp redirection directory
   fs::dir_delete(re_dir)
 }
+

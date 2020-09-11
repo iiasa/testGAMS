@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "brouwer@iiasa.ac.at",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Support functionality for testing GAMS code from R
+Description: Support functionality for testing GAMS code from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,3 +15,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
     testthat
+Imports: 
+    fs

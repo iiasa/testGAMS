@@ -1,3 +1,5 @@
 ^testGAMS\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^Makefile$
+^Jenkinsfile$

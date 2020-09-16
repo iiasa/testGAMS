@@ -31,7 +31,7 @@ run <- function(script) {
   arg_templates = c(
     '"{script}"'
   )
-  args <- unlist(lapply(arg_templates, stringr::str_glue))
+  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
 
   # Invoke GAMS
   system2(gams, args)

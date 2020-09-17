@@ -5,12 +5,9 @@
 #' Runs a GAMS script and capture result files for testing.
 #'
 #' @param path path of GAMS script to run
-#'
-#' @return
+#' @param path redirection directory for holding GAMS output files
 #' @export
-#'
-#' @examples
-run <- function(script) {
+run <- function(script, re_dir) {
   # Check and sanitize parameters
   stopifnot(length(script) == 1)
   path <- fs::as_fs_path(script)
@@ -19,10 +16,6 @@ run <- function(script) {
 
   # Extract the GAMS file name without extension from the path
   name <- fs::path_ext_remove(fs::path_file(script))
-
-  # Create temp directory for redirection
-  re_dir <- fs::file_temp("testGAMS")
-  fs::dir_create(re_dir)
 
   # Get path to GAMS binary (no exe extension needed)
   gams <- fs::path(get_sys_dir(), "gams")
@@ -35,8 +28,5 @@ run <- function(script) {
 
   # Invoke GAMS
   system2(gams, args)
-
-  # Delete the temp redirection directory
-  fs::dir_delete(re_dir)
 }
 

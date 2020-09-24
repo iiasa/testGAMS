@@ -22,20 +22,29 @@ run <- function(script, re_dir) {
   # Get path to GAMS binary (no exe extension needed)
   gams <- fs::path(get_sys_dir(), "gams")
 
-  # Construct a parameter file for GAMS (more robust)
-  parameter_templates = c(
-    'output="{fs::path(re_dir, \'output.lst\')}"'
+  # Construct parameter file for GAMS (more robust than passing command line args)
+  par_templates = c(
+    'logOption=2', # Log to file
+    'logFile="{fs::path(re_dir, \'output.log\')}"', # Path to log file
+    'logLine=0', # Minimize compile progress logging
+    'cErr=1', # Compile-time error limit: stop after 1 error
+    'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
+    'errMsg=1', # Explain error codes in listing file there where they occur
+    'output="{fs::path(re_dir, \'output.lst\')}"', # Path to listing file
+    'pageContr=2', # No page control, no padding
+    'pageSize=0', # Turn off paging
+    'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
   )
-  parameters <- purrr::map_chr(parameter_templates, stringr::str_glue, .envir=environment())
-  parameter_file <- fs::path(re_dir, "parameters.txt")
-  parameter_conn<-file(parameter_file, open="wt")
-  writeLines(parameters, parameter_conn)
-  close(parameter_conn)
+  pars <- purrr::map_chr(par_templates, stringr::str_glue, .envir=environment())
+  par_file <- fs::path(re_dir, "parameters.txt")
+  par_conn<-file(par_file, open="wt")
+  writeLines(pars, par_conn)
+  close(par_conn)
 
   # Construct command line arguments for GAMS
   arg_templates = c(
     '"{script}"',
-    '-parmFile "{parameter_file}"'
+    '-parmFile "{par_file}"'
   )
   args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
 

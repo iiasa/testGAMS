@@ -12,9 +12,8 @@
 #' @return re_dir Newly created uniquely named temporary directory.
 #' @export
 #' @examples
-#' # create a temporary redirection directory,
-#' #
-#' re_dir <- create(re_dir)
+#' re_dir <- create_re_dir()
+#' # Do something with the re_dir directory
 #' fs::dir_delete(re_dir)
 create_re_dir <- function() {
   re_dir <- fs::file_temp("testGAMS")
@@ -33,8 +32,8 @@ create_re_dir <- function() {
 #' @export
 #' @examples
 #' re_dir <- local_re_dir()
-#' # do something with re_dir
-#' # cleanup happens when this environment exits
+#' # Do something with re_dir.
+#' # Cleanup happens when this environment exits/returns
 local_re_dir <- function(env = parent.frame()) {
   re_dir <- create_re_dir()
   withr::defer(fs::dir_delete(re_dir), env = env)

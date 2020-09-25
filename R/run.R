@@ -1,11 +1,15 @@
 # TODO: redirect stderr, stdout, output=<listing file>, gdx=<GDX file>
 
+par_file_name <- "parameters.txt"
+log_file_name <- "output.log"
+lst_file_name <- "output.lst"
+
 #' Run a GAMS script for testing.
 #'
-#' Runs a GAMS script and capture result files for testing.
+#' Run a GAMS script and capture result files for testing.
 #'
-#' @param path path of GAMS script to run
-#' @param path redirection directory for holding GAMS output files
+#' @param script path of GAMS script to run
+#' @param re_dir redirection directory for holding GAMS output files
 #' @export
 run <- function(script, re_dir) {
   # Check and sanitize parameters
@@ -36,7 +40,7 @@ run <- function(script, re_dir) {
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
   )
   pars <- purrr::map_chr(par_templates, stringr::str_glue, .envir=environment())
-  par_file <- fs::path(re_dir, "parameters.txt")
+  par_file <- fs::path(re_dir, par_file_name)
   par_conn<-file(par_file, open="wt")
   writeLines(pars, par_conn)
   close(par_conn)
@@ -51,4 +55,3 @@ run <- function(script, re_dir) {
   # Invoke GAMS
   system2(gams, args)
 }
-

@@ -5,6 +5,7 @@
 # This test will fail when GAMS the system directory was never set
 # and no GAMS system directory is set in either R_GAMS_SYSDIR or
 # the PATH|LD_LIBRARY_PATH environment variable.
+context("Try a context for sys dir")
 test_that("GAMS system directory can be gotten and set", {
   sys_dir <- get_sys_dir()
   set_sys_dir(sys_dir)

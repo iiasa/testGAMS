@@ -1,8 +1,8 @@
 # TODO: redirect stderr, stdout, output=<listing file>, gdx=<GDX file>
 
-par_file_name <- "parameters.txt"
-log_file_name <- "output.log"
-lst_file_name <- "output.lst"
+LOG_FILE_NAME <- "output.log"
+LST_FILE_NAME <- "output.lst"
+PAR_FILE_NAME <- "parameters.txt"
 
 #' Run a GAMS script for testing.
 #'
@@ -28,19 +28,19 @@ run <- function(script, re_dir) {
 
   # Construct parameter file for GAMS (more robust than passing command line args)
   par_templates = c(
-    'logOption=2', # Log to file
-    'logFile="{fs::path(re_dir, \'output.log\')}"', # Path to log file
+    'logOption=2', # Log to file (stdout)
+    'logFile="{fs::path(re_dir, LOG_FILE_NAME)}"', # Path to log file
     'logLine=0', # Minimize compile progress logging
     'cErr=1', # Compile-time error limit: stop after 1 error
     'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
     'errMsg=1', # Explain error codes in listing file there where they occur
-    'output="{fs::path(re_dir, \'output.lst\')}"', # Path to listing file
+    'output="{fs::path(re_dir, LST_FILE_NAME)}"', # Path to listing file
     'pageContr=2', # No page control, no padding
     'pageSize=0', # Turn off paging
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
   )
   pars <- purrr::map_chr(par_templates, stringr::str_glue, .envir=environment())
-  par_file <- fs::path(re_dir, par_file_name)
+  par_file <- fs::path(re_dir, PAR_FILE_NAME)
   par_conn<-file(par_file, open="wt")
   writeLines(pars, par_conn)
   close(par_conn)
@@ -53,5 +53,18 @@ run <- function(script, re_dir) {
   args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
 
   # Invoke GAMS
-  system2(gams, args)
+  # ignore stdout: is already redirected to the log file,
+  # capture stderr: only used by GAMS when it crashes out
+  # status attribute on return value is set on error
+  err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))
+
+  # Extract and remove any status code
+  status <- attr(err, "status")
+  attr(err, "status") <- NULL
+
+  # Return status code when no stderr
+  if (identical(err, character(0))) return(status)
+
+  # Otherwise stop with stderr that GAMS crashed out with
+  stop(err)
 }

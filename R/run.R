@@ -8,8 +8,9 @@ PAR_FILE_NAME <- "parameters.txt"
 #'
 #' Run a GAMS script and capture result files for testing.
 #'
-#' @param script path of GAMS script to run
-#' @param re_dir redirection directory for holding GAMS output files
+#' @param script Path of GAMS script to run
+#' @param re_dir Pedirection directory for holding GAMS output files
+#' @return code  Code Status/Error/Return code,
 #' @export
 run <- function(script, re_dir) {
   # Check and sanitize parameters
@@ -58,12 +59,13 @@ run <- function(script, re_dir) {
   # status attribute on return value is set on error
   err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))
 
-  # Extract and remove any status code
-  status <- attr(err, "status")
+  # Extract and remove any status/error/return code
+  code <- attr(err, "status")
   attr(err, "status") <- NULL
+  if (is.null(code)) code <- 0
 
   # Return status code when no stderr
-  if (identical(err, character(0))) return(status)
+  if (identical(err, character(0))) return(code)
 
   # Otherwise stop with stderr that GAMS crashed out with
   stop(err)

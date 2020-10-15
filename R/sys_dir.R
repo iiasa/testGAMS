@@ -41,13 +41,13 @@ set_sys_dir <- function(gams_sys_dir) {
 #'
 #' @return Path to the in-use GAMS system directory.
 #' @export
-#'
 #' @examples
+#' sys_dir <- get_sys_dir()
 get_sys_dir <- function() {
-  gams_sys_dir <- gdxrrw::igdx(gamsSysDir=NULL, silent=TRUE, returnStr=TRUE)
+  gams_sys_dir <- gdxrrw::igdx(gamsSysDir = NULL, silent = TRUE, returnStr = TRUE)
   if (gams_sys_dir == "") {
     # GAMS sys dir not set, try R_GAMS_SYDIR or PATH/LD_LIBRARY_PATH
-    gams_sys_dir <- gdxrrw::igdx(gamsSysDir="", silent=TRUE, returnStr=TRUE)
+    gams_sys_dir <- gdxrrw::igdx(gamsSysDir = "", silent = TRUE, returnStr = TRUE)
     if (gams_sys_dir == "") stop("No GAMS system directory set!")
   }
   fs::as_fs_path(gams_sys_dir)

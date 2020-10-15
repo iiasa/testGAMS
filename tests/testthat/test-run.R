@@ -9,8 +9,29 @@ test_that("script argument of run() is checked", {
 })
 
 test_that("re_dir argument of run() is checked", {
-  gms_script <- fs::file_create(fs::file_temp(ext = "gms"))
-  withr::defer(fs::file_delete(gms_script))
-  expect_error(run(script = gms_script)) # re_dir argument required
-  expect_error(run(script = gms_script, re_dir = tmp_script)) # re_dir must be a directory
+  script <- fs::file_create(fs::file_temp(ext = "gms"))
+  withr::defer(fs::file_delete(script))
+  expect_error(run(script = script)) # re_dir argument required
+  expect_error(run(script = script, re_dir = tmp_script)) # re_dir must be a directory
 })
+
+test_that("run() can run a GAMS script", {
+  re_dir <- local_re_dir()
+  script <- fs::file_create(fs::path(re_dir, "test.gms"))
+  conn <- file(script, open="wt")
+  writeLines('display "Hello world!";', conn)
+  close(conn)
+  code <- run(script, re_dir)
+  expect_equal(code, CODE_NORMAL_RETURN)
+})
+
+test_that("run() can return a GAMS error code", {
+  re_dir <- local_re_dir()
+  script <- fs::file_create(fs::path(re_dir, "test.gms"))
+  conn <- file(script, open="wt")
+  writeLines('abort "Aborting execution!";', conn)
+  close(conn)
+  code <- run(script, re_dir)
+  expect_equal(code, CODE_EXECUTION_ERROR)
+})
+

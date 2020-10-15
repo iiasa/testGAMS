@@ -9,7 +9,7 @@ PAR_FILE_NAME <- "parameters.txt"
 #' Run a GAMS script and capture result files for testing.
 #'
 #' @param script Path of GAMS script to run
-#' @param re_dir Pedirection directory for holding GAMS output files
+#' @param re_dir Redirection directory for holding GAMS output files
 #' @return code  Code Status/Error/Return code,
 #' @export
 run <- function(script, re_dir) {
@@ -62,7 +62,7 @@ run <- function(script, re_dir) {
   # Extract and remove any status/error/return code
   code <- attr(err, "status")
   attr(err, "status") <- NULL
-  if (is.null(code)) code <- 0
+  if (is.null(code)) code <- CODE_NORMAL_RETURN
 
   # Return status code when no stderr
   if (identical(err, character(0))) return(code)

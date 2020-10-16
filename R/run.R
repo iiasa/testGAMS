@@ -1,12 +1,14 @@
-# TODO: redirect stderr, stdout, output=<listing file>, gdx=<GDX file>
-
+GDX_FILE_NAME <- "output.gdx"
 LOG_FILE_NAME <- "output.log"
 LST_FILE_NAME <- "output.lst"
 PAR_FILE_NAME <- "parameters.txt"
 
 #' Run a GAMS script for testing.
 #'
-#' Run a GAMS script and capture result files for testing.
+#' Run a GAMS script and capture result files for testing. The logging
+#' output, listing file, and a dump of all symbols are redirected to
+#' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
+#' and GDX_FILE_NAME.
 #'
 #' @param script Path of GAMS script to run
 #' @param re_dir Redirection directory for holding GAMS output files
@@ -29,13 +31,14 @@ run <- function(script, re_dir) {
 
   # Construct parameter file for GAMS (more robust than passing command line args)
   par_templates = c(
+    'cErr=1', # Compile-time error limit: stop after 1 error
+    'errMsg=1', # Explain error codes in listing file there where they occur
+    'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
+    'logLine=0', # Minimize compile progress logging
     'logOption=2', # Log to file (stdout)
     'logFile="{fs::path(re_dir, LOG_FILE_NAME)}"', # Path to log file
-    'logLine=0', # Minimize compile progress logging
-    'cErr=1', # Compile-time error limit: stop after 1 error
-    'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
-    'errMsg=1', # Explain error codes in listing file there where they occur
     'output="{fs::path(re_dir, LST_FILE_NAME)}"', # Path to listing file
+    'gdx="{fs::path(re_dir, GDX_FILE_NAME)}"', # Path to GDX file dumped at execution end
     'pageContr=2', # No page control, no padding
     'pageSize=0', # Turn off paging
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap

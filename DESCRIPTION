@@ -14,10 +14,12 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat
+    testthat,
+    vctrs,
+    xml2
 Imports: 
     fs,
     gdxrrw,
-    stringr,
     purrr,
+    stringr,
     withr

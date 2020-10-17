@@ -22,4 +22,5 @@ Imports:
     gdxrrw,
     purrr,
     stringr,
-    withr
+    withr,
+    tibble

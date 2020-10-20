@@ -1,11 +1,9 @@
 test_that("gdx_info() can index a GDX", {
   re_dir <- local_re_dir()
-  script <- fs::file_create(fs::path(re_dir, "test.gms"))
-  conn <- file(script, open="wt")
-  writeLines(c(
+  script <- fs::path(re_dir, "test.gms")
+  local_write_lines(script, c(
       'display "Do nothing.";'
-    ), conn)
-  close(conn)
+    ))
   code <- run(script, re_dir)
   expect_equal(code, CODE_NORMAL_RETURN)
 
@@ -25,15 +23,13 @@ test_that("gdx_info() can index a GDX", {
 
 test_that("gdx_parameter() can read a parameter from a GDX", {
   re_dir <- local_re_dir()
-  script <- fs::file_create(fs::path(re_dir, "test.gms"))
-  conn <- file(script, open="wt")
-  writeLines(c(
+  script <- fs::path(re_dir, "test.gms")
+  local_write_lines(script, c(
     'Parameter',
     '    dd(*) "distribution of demand"',
     '        / mexico-df   55,',
     '          guadalaja   15 /;'
-  ), conn)
-  close(conn)
+  ))
   code <- run(script, re_dir)
   expect_equal(code, CODE_NORMAL_RETURN)
 
@@ -47,17 +43,15 @@ test_that("gdx_parameter() can read a parameter from a GDX", {
 
 test_that("gdx_set() can read a parameter from a GDX", {
   re_dir <- local_re_dir()
-  script <- fs::file_create(fs::path(re_dir, "test.gms"))
-  conn <- file(script, open="wt")
-  writeLines(c(
+  script <- fs::path(re_dir, "test.gms")
+  local_write_lines(script, c(
     'Set cf "final products" /',
     'syncrude "refined crude (mil bbls)"',
     'lpg      "liquefied petroleum gas (million bbls)"',
     'ammonia  "ammonia (mil tons)"',
     'coke     "coke (mil tons)"',
     'sulfur   "sulfur (mil tons)" /;'
-  ), conn)
-  close(conn)
+  ))
   code <- run(script, re_dir)
   expect_equal(code, CODE_NORMAL_RETURN)
 

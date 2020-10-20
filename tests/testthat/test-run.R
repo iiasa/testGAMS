@@ -17,20 +17,16 @@ test_that("re_dir argument of run() is checked", {
 
 test_that("run() can run a GAMS script", {
   re_dir <- local_re_dir()
-  script <- fs::file_create(fs::path(re_dir, "test.gms"))
-  conn <- file(script, open="wt")
-  writeLines('display "Hello world!";', conn)
-  close(conn)
+  script <- fs::path(re_dir, "test.gms")
+  local_write_lines(script, 'display "Hello world!";')
   code <- run(script, re_dir)
   expect_equal(code, CODE_NORMAL_RETURN)
 })
 
 test_that("run() can return a GAMS error code", {
   re_dir <- local_re_dir()
-  script <- fs::file_create(fs::path(re_dir, "test.gms"))
-  conn <- file(script, open="wt")
-  writeLines('abort "Aborting execution!";', conn)
-  close(conn)
+  script <- fs::path(re_dir, "test.gms")
+  local_write_lines(script, 'abort "Aborting execution!";')
   code <- run(script, re_dir)
   expect_equal(code, CODE_EXECUTION_ERROR)
 })

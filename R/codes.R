@@ -1,12 +1,11 @@
-# Handle error/return codes
+# Handle GAMS error/return codes
 
 # Define test constants for important codes
-CODE_NORMAL_RETURN <- 0
-CODE_COMPILATION_ERROR <- 2
-CODE_EXECUTION_ERROR <- 3
-CODE_FILE_ERROR <- 5
-CODE_PARAMETER_ERROR <- 6
-
+GAMS_NORMAL_RETURN <- 0
+GAMS_COMPILATION_ERROR <- 2
+GAMS_EXECUTION_ERROR <- 3
+GAMS_FILE_ERROR <- 5
+GAMS_PARAMETER_ERROR <- 6
 
 # Define a list that maps status codes to their description
 # Taken from https://www.gams.com/32/docs/UG_GAMSReturnCodes.html#UG_GAMSReturnCodes_ListOfErrorCodes
@@ -49,7 +48,7 @@ CODE_DESCRIPTIONS[[5000]] <- "Driver error: internal error: cannot load option h
 
 describe_code <- function(code) {
   stopifnot(code >= 0)
-  if (code == CODE_NORMAL_RETURN) {
+  if (code == GAMS_NORMAL_RETURN) {
     # Use str_glue to get a uniform return type
     return(stringr::str_glue("GAMS returned {CODE_NORMAL_RETURN}: Normal return"))
   }

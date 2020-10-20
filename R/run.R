@@ -68,7 +68,7 @@ run <- function(script, re_dir) {
   # Extract and remove any status/error/return code
   code <- attr(err, "status")
   attr(err, "status") <- NULL
-  if (is.null(code)) code <- CODE_NORMAL_RETURN
+  if (is.null(code)) code <- GAMS_NORMAL_RETURN
 
   # Return status code when no stderr
   if (identical(err, character(0))) return(code)

@@ -5,7 +5,7 @@ test_that("gdx_info() can index a GDX", {
       'display "Do nothing.";'
     ))
   code <- run(script, re_dir)
-  expect_equal(code, CODE_NORMAL_RETURN)
+  expect_equal(code, GAMS_NORMAL_RETURN)
 
   info <- gdx_info(re_dir)
   expect_true('gdxLibraryVer' %in% names(info))
@@ -31,7 +31,7 @@ test_that("gdx_parameter() can read a parameter from a GDX", {
     '          guadalaja   15 /;'
   ))
   code <- run(script, re_dir)
-  expect_equal(code, CODE_NORMAL_RETURN)
+  expect_equal(code, GAMS_NORMAL_RETURN)
 
   info <- gdx_info(re_dir)
   p <- gdx_parameter(info, 'dd')
@@ -53,7 +53,7 @@ test_that("gdx_set() can read a parameter from a GDX", {
     'sulfur   "sulfur (mil tons)" /;'
   ))
   code <- run(script, re_dir)
-  expect_equal(code, CODE_NORMAL_RETURN)
+  expect_equal(code, GAMS_NORMAL_RETURN)
 
   info <- gdx_info(re_dir)
   s <- gdx_set(info, 'cf')

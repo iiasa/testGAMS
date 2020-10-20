@@ -20,7 +20,7 @@ test_that("run() can run a GAMS script", {
   script <- fs::path(re_dir, "test.gms")
   local_write_lines(script, 'display "Hello world!";')
   code <- run(script, re_dir)
-  expect_equal(code, CODE_NORMAL_RETURN)
+  expect_equal(code, GAMS_NORMAL_RETURN)
 })
 
 test_that("run() can return a GAMS error code", {
@@ -28,6 +28,6 @@ test_that("run() can return a GAMS error code", {
   script <- fs::path(re_dir, "test.gms")
   local_write_lines(script, 'abort "Aborting execution!";')
   code <- run(script, re_dir)
-  expect_equal(code, CODE_EXECUTION_ERROR)
+  expect_equal(code, GAMS_EXECUTION_ERROR)
 })
 

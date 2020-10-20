@@ -1,10 +1,15 @@
 # Handle GAMS error/return codes
 
 # Define test constants for important codes
+#' @export
 GAMS_NORMAL_RETURN <- 0
+#' @export
 GAMS_COMPILATION_ERROR <- 2
+#' @export
 GAMS_EXECUTION_ERROR <- 3
+#' @export
 GAMS_FILE_ERROR <- 5
+#' @export
 GAMS_PARAMETER_ERROR <- 6
 
 # Define a list that maps status codes to their description

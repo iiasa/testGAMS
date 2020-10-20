@@ -1,5 +1,8 @@
+#' @export
 GDX_FILE_NAME <- "output.gdx"
+#' @export
 LOG_FILE_NAME <- "output.log"
+#' @export
 LST_FILE_NAME <- "output.lst"
 PAR_FILE_NAME <- "parameters.txt"
 

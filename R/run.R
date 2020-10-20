@@ -10,14 +10,14 @@ PAR_FILE_NAME <- "parameters.txt"
 #' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
 #' and GDX_FILE_NAME.
 #'
-#' @param script Path of GAMS script to run
-#' @param re_dir Redirection directory for holding GAMS output files
-#' @return code  Code Status/Error/Return code,
+#' @param script Path of GAMS script to run.
+#' @param re_dir Redirection directory for holding GAMS output files.
+#' @return GAMS status/error/return code.
 #' @export
 run <- function(script, re_dir) {
   # Check and sanitize parameters
   stopifnot(length(script) == 1)
-  path <- fs::as_fs_path(script)
+  script <- fs::as_fs_path(script)
   stopifnot(fs::is_file(script))
   stopifnot(fs::path_ext(script) == "gms")
   re_dir <- fs::as_fs_path(re_dir)

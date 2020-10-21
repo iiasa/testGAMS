@@ -1,15 +1,5 @@
 # Functions to read log and listing files for grepping
 
-# Package-private test helper to write lines to a file for local use,
-# truncating or creating it before writing, and setting deferred
-# deletion of the file on destruction of the invoking environment.
-local_write_lines <- function(path, lines, env = parent.frame()) {
-  conn <- file(path, open="wt")
-  withr::defer(fs::file_delete(path), env = env)
-  writeLines(lines, conn)
-  close(conn)
-}
-
 #' Read line from a text file
 #'
 #' @param  path  Path to text file.

@@ -1,7 +1,7 @@
 test_that("gdx_info() can index a GDX", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
-  local_write_lines(script, c(
+  write_lines(script, c(
       'display "Do nothing.";'
     ))
   code <- run(script, re_dir)
@@ -24,7 +24,7 @@ test_that("gdx_info() can index a GDX", {
 test_that("gdx_parameter() can read a parameter from a GDX", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
-  local_write_lines(script, c(
+  write_lines(script, c(
     'Parameter',
     '    dd(*) "distribution of demand"',
     '        / mexico-df   55,',
@@ -44,7 +44,7 @@ test_that("gdx_parameter() can read a parameter from a GDX", {
 test_that("gdx_set() can read a parameter from a GDX", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
-  local_write_lines(script, c(
+  write_lines(script, c(
     'Set cf "final products" /',
     'syncrude "refined crude (mil bbls)"',
     'lpg      "liquefied petroleum gas (million bbls)"',

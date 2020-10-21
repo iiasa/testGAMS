@@ -48,9 +48,7 @@ run <- function(script, re_dir) {
   )
   pars <- purrr::map_chr(par_templates, stringr::str_glue, .envir=environment())
   par_file <- fs::path(re_dir, PAR_FILE_NAME)
-  par_conn<-file(par_file, open="wt")
-  writeLines(pars, par_conn)
-  close(par_conn)
+  write_lines(par_file, pars)
 
   # Construct command line arguments for GAMS
   arg_templates = c(

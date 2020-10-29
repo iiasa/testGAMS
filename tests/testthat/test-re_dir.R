@@ -14,6 +14,6 @@ test_that("local_re_dir() creates and cleans up a directory", {
     NULL
   }
   re_dir <- create_local_re_dir()
-  expect_vector(re_dir, ptype = fs::fs_path())
+  expect_vector(re_dir, ptype = fs::fs_path(""))
   expect_false(fs::dir_exists(re_dir))
 })

@@ -24,4 +24,5 @@ pipeline {
                 testResults: 'testGAMS.Rcheck/tests/junit_result.xml'
             )
         }
+    }
 }

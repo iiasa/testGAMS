@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Clean') {
+            steps {
+                sh 'make clean'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'make build'
@@ -11,10 +16,12 @@ pipeline {
                 sh 'make check'
             }
         }
-        stage('Clean') {
-            steps {
-                sh 'make clean'
-            }
-        }
     }
+    post {
+        always {
+            junit(
+                allowEmptyResults: true,
+                testResults: 'testGAMS.Rcheck/tests/junit_result.xml'
+            )
+        }
 }

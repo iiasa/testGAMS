@@ -1,14 +1,24 @@
 # Handle GAMS error/return codes
 
 # Define test constants for important codes
+
+#' GAMS return code in case of normal completion
 #' @export
 GAMS_NORMAL_RETURN <- 0
+
+#' Error code returned by GAMS in case of a compilation error
 #' @export
 GAMS_COMPILATION_ERROR <- 2
+
+#' Error code returned by GAMS in case of an execution error
 #' @export
 GAMS_EXECUTION_ERROR <- 3
+
+#' Error code returned by GAMS in case of a file error
 #' @export
 GAMS_FILE_ERROR <- 5
+
+#' Error code returned by GAMS in case of a faulty parameter
 #' @export
 GAMS_PARAMETER_ERROR <- 6
 

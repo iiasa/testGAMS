@@ -1,15 +1,21 @@
+#' File name of GDX dump produced by `run()` in `re_dir`
 #' @export
 GDX_FILE_NAME <- "output.gdx"
+
+#' File name of GANS log file produced by `run()` in `re_dir`
 #' @export
 LOG_FILE_NAME <- "output.log"
+
+#' File name of GAMS listing file produced by `run()` in `re_dir`
 #' @export
 LST_FILE_NAME <- "output.lst"
+
 PAR_FILE_NAME <- "parameters.txt"
 
 #' Run a GAMS script for testing.
 #'
 #' Run a GAMS script and capture result files for testing. The logging
-#' output, listing file, and a dump of all symbols are redirected to
+#' output, listing file, and a GDX dump of all symbols are redirected to
 #' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
 #' and GDX_FILE_NAME.
 #'

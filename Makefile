@@ -14,6 +14,10 @@ build:
 check: build
 	R CMD check --no-manual $(PKGNAME)_$(PKGVERS).tar.gz
 
+coverage:
+	Rscript \
+	-e 'covr::to_cobertura(covr::package_coverage(), filename = "cobertura.xml")'
+
 install_deps:
 	Rscript \
 	-e 'if (!requireNamespace("remotes")) install.packages("remotes")' \
@@ -23,4 +27,4 @@ install: install_deps build
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
 clean:
-	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck
+	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck cobertura.xml

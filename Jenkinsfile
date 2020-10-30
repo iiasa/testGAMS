@@ -18,6 +18,10 @@ pipeline {
         }
     }
     post {
+        success {
+            sh 'make coverage'
+            cobertura coberturaReportFile: 'cobertura.xml'
+        }
         always {
             junit(
                 allowEmptyResults: true,

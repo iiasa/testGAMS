@@ -18,8 +18,3 @@ Create a temporary directory via \code{create_re_dir()} with a cleanup handler
 attached to the calling environment. Cleanup deletes the directory and its
 contents using \code{withr::defer()}.
 }
-\examples{
-re_dir <- local_re_dir()
-# Do something with re_dir.
-# Cleanup happens when this environment exits/returns
-}

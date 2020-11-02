@@ -30,10 +30,6 @@ create_re_dir <- function() {
 #' this environment, defaults to the calling environment.
 #' @return re_dir Newly created uniquely named temporary directory.
 #' @export
-#' @examples
-#' re_dir <- local_re_dir()
-#' # Do something with re_dir.
-#' # Cleanup happens when this environment exits/returns
 local_re_dir <- function(env = parent.frame()) {
   re_dir <- create_re_dir()
   withr::defer(fs::dir_delete(re_dir), env = env)

@@ -10,14 +10,19 @@ LOG_FILE_NAME <- "output.log"
 #' @export
 LST_FILE_NAME <- "output.lst"
 
+#' File name of GAMS trace file produced by `run()` in `re_dir`
+#' @export
+TRACE_FILE_NAME <- "trace.txt"
+
 PAR_FILE_NAME <- "parameters.txt"
 
 #' Run a GAMS script for testing.
 #'
-#' Run a GAMS script and capture result files for testing. The logging
-#' output, listing file, and a GDX dump of all symbols are redirected to
-#' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
-#' and GDX_FILE_NAME.
+#' Run a GAMS script and captures output files for testing. The logging
+#' output, listing file, trace file, and a GDX dump of all symbols are
+#' redirected to files located in `re_dir` with names LOG_FILE_NAME,
+#' LST_FILE_NAME, TRACE_FILE_NAME, and GDX_FILE_NAME respectively.
+#' The default compile-and-execute action is used.
 #'
 #' @param script Path of GAMS script to run.
 #' @param re_dir Redirection directory for holding GAMS output files.
@@ -48,6 +53,7 @@ run <- function(script, re_dir) {
     'logFile="{fs::path(re_dir, LOG_FILE_NAME)}"', # Path to log file
     'output="{fs::path(re_dir, LST_FILE_NAME)}"', # Path to listing file
     'gdx="{fs::path(re_dir, GDX_FILE_NAME)}"', # Path to GDX file dumped at execution end
+    'trace="{fs::path(re_dir, TRACE_FILE_NAME)}"', # Path to trace file
     'pageContr=2', # No page control, no padding
     'pageSize=0', # Turn off paging
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap

@@ -15,8 +15,9 @@ run(script, re_dir)
 GAMS status/error/return code.
 }
 \description{
-Run a GAMS script and capture result files for testing. The logging
-output, listing file, and a GDX dump of all symbols are redirected to
-files located in \code{re_dir} with names LOG_FILE_NAME, LST_FILE_NAME,
-and GDX_FILE_NAME.
+Run a GAMS script and captures output files for testing. The logging
+output, listing file, trace file, and a GDX dump of all symbols are
+redirected to files located in \code{re_dir} with names LOG_FILE_NAME,
+LST_FILE_NAME, TRACE_FILE_NAME, and GDX_FILE_NAME respectively.
+The default compile-and-execute action is used.
 }

@@ -15,12 +15,16 @@ test_that("re_dir argument of run() is checked", {
   expect_error(run(script = script, re_dir = tmp_script)) # re_dir must be a directory
 })
 
-test_that("run() can run a GAMS script", {
+test_that("run() can run a GAMS script and produce output files", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
   write_lines(script, 'display "Hello world!";')
   code <- run(script, re_dir)
   expect_equal(code, GAMS_NORMAL_RETURN)
+  expect_true(fs::file_exists(fs::path(re_dir, GDX_FILE_NAME)))
+  expect_true(fs::file_exists(fs::path(re_dir, LOG_FILE_NAME)))
+  expect_true(fs::file_exists(fs::path(re_dir, LST_FILE_NAME)))
+  expect_true(fs::file_exists(fs::path(re_dir, TRACE_FILE_NAME)))
 })
 
 test_that("run() can return a GAMS error code", {

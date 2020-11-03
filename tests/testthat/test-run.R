@@ -35,3 +35,14 @@ test_that("run() can return a GAMS error code", {
   expect_equal(code, GAMS_EXECUTION_ERROR)
 })
 
+test_that("report_trace() works and produces report and summary files", {
+  re_dir <- local_re_dir()
+  script <- test_path("models", "transport.gms")
+  code <- run(script, re_dir)
+  expect_equal(code, GAMS_NORMAL_RETURN)
+
+  code <- report_trace(re_dir)
+  expect_equal(code, GAMS_NORMAL_RETURN)
+  expect_true(fs::file_exists(fs::path(re_dir, TRACE_REPORT_FILE_NAME)))
+  expect_true(fs::file_exists(fs::path(re_dir, TRACE_SUMMARY_FILE_NAME)))
+})

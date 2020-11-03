@@ -14,30 +14,24 @@ read_lines <- function(path) {
 
 #' Read lines from log file
 #'
-#' Reads the lines from a GAMS log file. Uses`LOG_FILE_NAME` by default,
-#' which is where `run()` to redirects GAMS logging to. When using this
-#' default, the `dir` argument should be set to the redirection directory
-#' used for the `run()`.
+#' Reads the lines from the GAMS log output file written during
+#' a  `run()`.
 #'
-#' @param  dir  Directory containing log file.
-#' @param  name Name of log file.
+#' @param  re_dir Redirection directory used for the `run()`.
 #' @return Character vector holding lines in the read log file.
 #' @export
-read_log <- function(dir, name=LOG_FILE_NAME) {
-  read_lines(fs::path(dir, name))
+read_log <- function(re_dir) {
+  read_lines(fs::path(re_dir, LOG_FILE_NAME))
 }
 
 #' Read lines from listing file
 #'
-#' Reads the lines from a GAMS listing file. Uses`LST_FILE_NAME` by default,
-#' which is where `run()` redirects GAMS listing to. When using this
-#' default, the `dir` argument should be set to the redirection directory
-#' used for the `run()`.
+#' Reads the lines from the GAMS listing output file written during
+#' a  `run()`.
 #'
-#' @param  dir  Directory containing log file.
-#' @param  name Name of log file.
+#' @param  re_dir Redirection directory used for the `run()`.
 #' @return Character vector holding lines in the read listing file.
 #' @export
-read_lst <- function(dir, name=LST_FILE_NAME) {
-  read_lines(fs::path(dir, name))
+read_lst <- function(re_dir) {
+  read_lines(fs::path(re_dir, LST_FILE_NAME))
 }

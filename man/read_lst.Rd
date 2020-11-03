@@ -4,19 +4,15 @@
 \alias{read_lst}
 \title{Read lines from listing file}
 \usage{
-read_lst(dir, name = LST_FILE_NAME)
+read_lst(re_dir)
 }
 \arguments{
-\item{dir}{Directory containing log file.}
-
-\item{name}{Name of log file.}
+\item{re_dir}{Redirection directory used for the \code{run()}.}
 }
 \value{
 Character vector holding lines in the read listing file.
 }
 \description{
-Reads the lines from a GAMS listing file. Uses\code{LST_FILE_NAME} by default,
-which is where \code{run()} redirects GAMS listing to. When using this
-default, the \code{dir} argument should be set to the redirection directory
-used for the \code{run()}.
+Reads the lines from the GAMS listing output file written during
+a  \code{run()}.
 }

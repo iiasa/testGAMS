@@ -2,7 +2,7 @@
 % Please edit documentation in R/run.R
 \name{run}
 \alias{run}
-\title{Run a GAMS script for testing.}
+\title{Run a GAMS script for testing}
 \usage{
 run(script, re_dir)
 }

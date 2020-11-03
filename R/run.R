@@ -14,9 +14,17 @@ LST_FILE_NAME <- "output.lst"
 #' @export
 TRACE_FILE_NAME <- "trace.txt"
 
+#' File name of GAMS trace summary file produced by `trace_report()` in `re_dir`
+#' @export
+TRACE_SUMMARY_FILE_NAME <- "trace.sum"
+
+#' File name of GAMS trace report file produced by `trace_report()` in `re_dir`
+#' @export
+TRACE_REPORT_FILE_NAME <- "trace.lst"
+
 PAR_FILE_NAME <- "parameters.txt"
 
-#' Run a GAMS script for testing.
+#' Run a GAMS script for testing
 #'
 #' Run a GAMS script and captures output files for testing. The logging
 #' output, listing file, trace file, and a GDX dump of all symbols are
@@ -65,12 +73,60 @@ run <- function(script, re_dir) {
   # Construct command line arguments for GAMS
   arg_templates = c(
     '"{script}"',
-    '-parmFile "{par_file}"'
+    'parmFile="{par_file}"'
   )
   args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
 
   # Invoke GAMS
   # ignore stdout: is already redirected to the log file,
+  # capture stderr: only used by GAMS when it crashes out
+  # status attribute on return value is set on error
+  err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))
+
+  # Extract and remove any status/error/return code
+  code <- attr(err, "status")
+  attr(err, "status") <- NULL
+  if (is.null(code)) code <- GAMS_NORMAL_RETURN
+
+  # Return status code when no stderr
+  if (identical(err, character(0))) return(code)
+
+  # Otherwise stop with stderr that GAMS crashed out with
+  stop(err)
+}
+
+#' Generate trace report and summary files from trace file
+#'
+#' Have GAMS generate a trace report and summary given the trace file
+#' output by `run()` in `re_dir`. The report and summary are also
+#' written to `re_dir` as files with names`TRACE_REPORT_FILE_NAME`
+#' and `TRACE_SUMMARY_FILE_NAME` respectively.
+#'
+#' @param re_dir Redirection directory for holding GAMS output files.
+#' @param trace_level Modelstat/Solvestat threshold for filtering GamsSolve trace records.
+#' @return GAMS status/error/return code.
+#' @export
+report_trace <- function(re_dir, trace_level = 0) {
+  re_dir <- fs::as_fs_path(re_dir)
+  stopifnot(fs::dir_exists(re_dir))
+
+  # GAMS seems unable to use curDir or a path prefix for the 'GT' action,
+  # so we set and restore the working directory.
+  old_wd <- setwd(re_dir)
+  if (!is.null(old_wd)) withr::defer(setwd(old_wd))
+
+  # Get path to GAMS binary (no exe extension needed)
+  gams <- fs::path(get_sys_dir(), "gams")
+
+  # Construct command line arguments for GAMS
+  arg_templates = c(
+    '"{TRACE_FILE_NAME}"',
+    'action=GT',
+    'traceLevel={trace_level}'
+  )
+  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
+
+  # Invoke GAMS
   # capture stderr: only used by GAMS when it crashes out
   # status attribute on return value is set on error
   err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))

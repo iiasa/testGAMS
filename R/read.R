@@ -35,3 +35,15 @@ read_log <- function(re_dir) {
 read_lst <- function(re_dir) {
   read_lines(fs::path(re_dir, LST_FILE_NAME))
 }
+
+#' Read lines from trace file
+#'
+#' Reads the lines from the GAMS trace file written during
+#' a  `run()`.
+#'
+#' @param  re_dir Redirection directory used for the `run()`.
+#' @return Character vector holding lines in the read trace file.
+#' @export
+read_trace <- function(re_dir) {
+  read_lines(fs::path(re_dir, TRACE_FILE_NAME))
+}

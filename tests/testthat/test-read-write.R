@@ -19,15 +19,20 @@ test_that("write_lines_cleanup() works", {
   expect_false(fs::file_exists(path))
 })
 
-test_that("read_log() and read_lst() work", {
-  test_string <- "Some text that goes into the listing file" # beware: avoid regex special characters
+test_that("read_log(), read_lst(), and read_trace() work", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
+  test_string <- "Some text that goes into the listing file" # beware: avoid regex special characters
   write_lines(script, stringr::str_glue('display "{test_string}";'))
   code <- run(script, re_dir)
   expect_equal(code, GAMS_NORMAL_RETURN)
+
   log <- read_log(re_dir)
   expect_match(log, "Normal completion", all = FALSE)
+
   lst <- read_lst(re_dir)
   expect_match(lst, test_string, all = FALSE)
+
+  trace <- read_trace(re_dir)
+  expect_match(trace, "Trace Record Definition", all = FALSE)
 })

@@ -1,13 +1,13 @@
 #' Create temporary redirection directory
 #'
 #' Create a temporary directory to where output files can be redirected for
-#' examination and later cleanup. Once the output files have been written
-#' to the redirection directory, apply any needed tests to them to examine
-#' their content. Thereafter, cleanup can be performed by deleting the
-#' directory and its content in one go, e.g. by using `fs::dir_delete()`.
+#' examination and later cleanup. Once the output files have been written to the
+#' redirection directory, apply any needed tests to them to examine their
+#' content. Thereafter, cleanup can be performed by deleting the directory and
+#' its content in one go, e.g. by using [fs::dir_delete()].
 #'
-#' You may wish to defer the cleanup to a cleanup handler such as `on.exit()`
-#' or `withr::defer()`. The `local_re_dir()` function does this for you.
+#' You may wish to defer the cleanup to a cleanup handler such as [on.exit()] or
+#' [withr::defer()]. The [local_re_dir()] function does this for you.
 #'
 #' @return re_dir Newly created uniquely named temporary directory.
 #' @export
@@ -22,12 +22,12 @@ create_re_dir <- function() {
 
 #' Create temporary redirection directory with local cleanup
 #'
-#' Create a temporary directory via `create_re_dir()` with a cleanup handler
+#' Create a temporary directory via [create_re_dir()] with a cleanup handler
 #' attached to the calling environment. Cleanup deletes the directory and its
-#' contents using `withr::defer()`.
+#' contents using [withr::defer()].
 #'
-#' @param env \[`environment`: `parent.frame()`]\cr Attach cleanup handler to
-#' this environment, defaults to the calling environment.
+#' @param env Attach cleanup handler to this environment, defaults to the
+#'   calling environment.
 #' @return re_dir Newly created uniquely named temporary directory.
 #' @export
 local_re_dir <- function(env = parent.frame()) {

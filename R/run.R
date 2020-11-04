@@ -1,24 +1,24 @@
-#' File name of GDX dump produced by `run()` in `re_dir`
+#' File name of GDX dump produced by [run()] in `re_dir`
 #' @export
 GDX_FILE_NAME <- "output.gdx"
 
-#' File name of GANS log file produced by `run()` in `re_dir`
+#' File name of GAMS log file produced by [run()] in `re_dir`
 #' @export
 LOG_FILE_NAME <- "output.log"
 
-#' File name of GAMS listing file produced by `run()` in `re_dir`
+#' File name of GAMS listing file produced by [run()] in `re_dir`
 #' @export
 LST_FILE_NAME <- "output.lst"
 
-#' File name of GAMS trace file produced by `run()` in `re_dir`
+#' File name of GAMS trace file produced by [run()] in `re_dir`
 #' @export
 TRACE_FILE_NAME <- "trace.txt"
 
-#' File name of GAMS trace summary file produced by `trace_report()` in `re_dir`
+#' File name of GAMS trace summary file produced by [report_trace()] in `re_dir`
 #' @export
 TRACE_SUMMARY_FILE_NAME <- "trace.sum"
 
-#' File name of GAMS trace report file produced by `trace_report()` in `re_dir`
+#' File name of GAMS trace report file produced by [report_trace()] in `re_dir`
 #' @export
 TRACE_REPORT_FILE_NAME <- "trace.lst"
 
@@ -29,19 +29,19 @@ TRACE_LOG_FILE_NAME <- "trace.log"
 #'
 #' Run a GAMS script and captures output files for testing. The logging output,
 #' listing file, trace file, and a GDX dump of all symbols are redirected to
-#' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
-#' TRACE_FILE_NAME, and GDX_FILE_NAME respectively. The default
+#' files located in `re_dir` with names `LOG_FILE_NAME`, `LST_FILE_NAME`,
+#' `TRACE_FILE_NAME`, and `GDX_FILE_NAME` respectively. The default
 #' compile-and-execute action is used.
 #'
-#' Optionally, additional
-#' \href{https://www.gams.com/latest/docs/UG_GamsCall.html}{GAMS parameters} can
-#' be provided. These add to or override the GAMS default parameters and the
-#' parameters that `run()` sets for testing purposes. Parameters can be
-#' specified in "<keyword>=<value>" format.
+#' Optionally, [GAMS
+#' parameters](https://www.gams.com/latest/docs/UG_GamsCall.html) can be
+#' provided. These add to or override the GAMS default parameters and the
+#' parameters that [run()] sets for testing purposes. They can be specified in
+#' "<keyword>=<value>" format.
 #'
 #' @param script Path of GAMS script to run.
 #' @param re_dir Redirection directory for holding GAMS output files.
-#' @param params Character vector of additional GAMS parameters.
+#' @param params Character vector of GAMS parameters.
 #' @return GAMS status/error/return code.
 #' @export
 run <- function(script, re_dir, params = NULL) {
@@ -105,21 +105,22 @@ run <- function(script, re_dir, params = NULL) {
 
 #' Generate trace report and summary files from trace file
 #'
-#' Have GAMS generate a trace report and summary given the trace file
-#' output by `run()` in `re_dir`. The report and summary are also
-#' written to `re_dir` as files with names`TRACE_REPORT_FILE_NAME`
-#' and `TRACE_SUMMARY_FILE_NAME` respectively.
+#' Have GAMS generate a trace report and summary given the trace file output by
+#' [run()] in `re_dir`. The report and summary are also written to `re_dir` as
+#' files with names`TRACE_REPORT_FILE_NAME` and `TRACE_SUMMARY_FILE_NAME`
+#' respectively.
 #'
 #' @param re_dir Redirection directory for holding GAMS output files.
-#' @param trace_level Modelstat/Solvestat threshold for filtering GamsSolve trace records.
+#' @param trace_level Modelstat/Solvestat threshold for filtering GamsSolve
+#'   trace records.
 #' @return GAMS status/error/return code.
 #' @export
 report_trace <- function(re_dir, trace_level = 0) {
   re_dir <- fs::as_fs_path(re_dir)
   stopifnot(fs::dir_exists(re_dir))
 
-  # GAMS seems unable to use curDir or a path prefix for the 'GT' action,
-  # so we set and restore the working directory.
+  # GAMS seems unable to use curDir or a path prefix for the 'GT' action, so we
+  # set and restore the working directory.
   old_wd <- setwd(re_dir)
   if (!is.null(old_wd)) withr::defer(setwd(old_wd))
 

@@ -1,9 +1,9 @@
 #' Return info on content of a GDX
 #'
 #' Returns a list with information on the content of a GDX file. Uses
-#' `GDX_FILE_NAME` by default, which is the name used by `run()` to dump
-#' an end-of-execution GDX. When using this default, the `dir` argument
-#' should be set to the redirection directory used for the `run()`.
+#' `GDX_FILE_NAME` by default, which is the name used by [run()] to dump an
+#' end-of-execution GDX. When using this default, the `dir` argument should be
+#' set to the redirection directory used for the [run()].
 #'
 #' @param  dir  Directory containing GDX file.
 #' @param  name Name of GDX file.
@@ -18,7 +18,7 @@ gdx_info <- function(dir, name=GDX_FILE_NAME) {
 
 #' Read a parameter from a GDX file as a tibble
 #'
-#' @param info Info list as returned by `gdx_info()`.
+#' @param info Info list as returned by [gdx_info()].
 #' @param name Name of the parameter to read.
 #' @return Tibble with parameter content.
 #' @export
@@ -31,7 +31,7 @@ gdx_parameter <- function(info, name) {
 
 #' Read a set from a GDX file
 #'
-#' @param info Info list as returned by `gdx_info()`.
+#' @param info Info list as returned by [gdx_info()].
 #' @param name Name of the set to read.
 #' @return List with set content.
 #' @export

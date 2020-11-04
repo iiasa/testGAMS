@@ -1,15 +1,14 @@
 #' Set GAMS system directory
 #'
 #' Set the GAMS installation to use for testing by specifying the system
-#' directory where the GAMS binaries and libraries are installed. There
-#' can be multiple GAMS versions installed, so this functions selects
-#' the GAMS version to test with. Specifically, the GDX libraries and
-#' GAMS compiler/interpreter located in the set GAMS system directory
-#' will be used by the functions in the testGAMS package.
+#' directory where the GAMS binaries and libraries are installed. There can be
+#' multiple GAMS versions installed, so this functions selects the GAMS version
+#' to test with. Specifically, the GDX libraries and GAMS compiler/interpreter
+#' located in the set GAMS system directory will be used by the functions in the
+#' testGAMS package.
 #'
-#' Internally, this function uses the `igdx()` function from the gdxrrw
-#' package via which GDX files are accessed. The currently-set system
-#' directory is returned by `get_sys_dir()`.
+#' Internally, this function uses [gdxrrw::igdx()] via which GDX files are
+#' accessed. The currently-set system directory is returned by [get_sys_dir()].
 #'
 #' This function throws an error if the given directory cannot be set.
 #'
@@ -27,17 +26,16 @@ set_sys_dir <- function(gams_sys_dir) {
 
 #' Get GAMS system directory
 #'
-#' Get the path to the GAMS system directory being used for testing. This
-#' is the GAMS installation directory where the GDX libraries and GAMS
-#' compiler/interpreter will be loaded from. It therefore determines which
-#' GAMS version is used for testing. The GAMS system directory can be
-#' set with `set_sys_dir()`.
+#' Get the path to the GAMS system directory being used for testing. This is the
+#' GAMS installation directory where the GDX libraries and GAMS
+#' compiler/interpreter will be loaded from. It therefore determines which GAMS
+#' version is used for testing. The GAMS system directory can be set with
+#' [set_sys_dir()].
 #'
-#' When no system directory is set yet, this function will try to get and
-#' set a default system directory from an environment variable, first
-#' `R_GAMS_SYSDIR`, and if not available via `PATH` (on Windows) or
-#' `LD_LIBRARY_PATH` (on Linux). If no such default is available either,
-#' this function throws an error.
+#' When no system directory is set yet, this function will try to get and set a
+#' default system directory from an environment variable, first `R_GAMS_SYSDIR`,
+#' and if not available via `PATH` (on Windows) or `LD_LIBRARY_PATH` (on Linux).
+#' If no such default is available either, this function throws an error.
 #'
 #' @return Path to the in-use GAMS system directory.
 #' @export

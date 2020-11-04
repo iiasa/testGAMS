@@ -26,17 +26,24 @@ PAR_FILE_NAME <- "parameters.txt"
 
 #' Run a GAMS script for testing
 #'
-#' Run a GAMS script and captures output files for testing. The logging
-#' output, listing file, trace file, and a GDX dump of all symbols are
-#' redirected to files located in `re_dir` with names LOG_FILE_NAME,
-#' LST_FILE_NAME, TRACE_FILE_NAME, and GDX_FILE_NAME respectively.
-#' The default compile-and-execute action is used.
+#' Run a GAMS script and captures output files for testing. The logging output,
+#' listing file, trace file, and a GDX dump of all symbols are redirected to
+#' files located in `re_dir` with names LOG_FILE_NAME, LST_FILE_NAME,
+#' TRACE_FILE_NAME, and GDX_FILE_NAME respectively. The default
+#' compile-and-execute action is used.
+#'
+#' Optionally, additional
+#' \href{https://www.gams.com/latest/docs/UG_GamsCall.html}{GAMS parameters} can
+#' be provided. These add to or override the GAMS default parameters and the
+#' parameters that `run()` sets for testing purposes. Parameters can be
+#' specified in "<keyword>=<value>" format.
 #'
 #' @param script Path of GAMS script to run.
 #' @param re_dir Redirection directory for holding GAMS output files.
+#' @param params Character vector of additional GAMS parameters.
 #' @return GAMS status/error/return code.
 #' @export
-run <- function(script, re_dir) {
+run <- function(script, re_dir, params = NULL) {
   # Check and sanitize parameters
   stopifnot(length(script) == 1)
   script <- fs::as_fs_path(script)
@@ -52,7 +59,7 @@ run <- function(script, re_dir) {
   gams <- fs::path(get_sys_dir(), "gams")
 
   # Construct parameter file for GAMS (more robust than passing command line args)
-  par_templates = c(
+  param_templates = c(
     'cErr=1', # Compile-time error limit: stop after 1 error
     'errMsg=1', # Explain error codes in listing file there where they occur
     'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
@@ -66,9 +73,9 @@ run <- function(script, re_dir) {
     'pageSize=0', # Turn off paging
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
   )
-  pars <- purrr::map_chr(par_templates, stringr::str_glue, .envir=environment())
+  test_params <- purrr::map_chr(param_templates, stringr::str_glue, .envir=environment())
   par_file <- fs::path(re_dir, PAR_FILE_NAME)
-  write_lines(par_file, pars)
+  write_lines(par_file, test_params, params)
 
   # Construct command line arguments for GAMS
   arg_templates = c(

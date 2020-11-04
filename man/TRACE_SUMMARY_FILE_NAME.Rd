@@ -3,7 +3,7 @@
 \docType{data}
 \name{TRACE_SUMMARY_FILE_NAME}
 \alias{TRACE_SUMMARY_FILE_NAME}
-\title{File name of GAMS trace summary file produced by \code{trace_report()} in \code{re_dir}}
+\title{File name of GAMS trace summary file produced by \code{\link[=report_trace]{report_trace()}} in \code{re_dir}}
 \format{
 An object of class \code{character} of length 1.
 }
@@ -11,6 +11,6 @@ An object of class \code{character} of length 1.
 TRACE_SUMMARY_FILE_NAME
 }
 \description{
-File name of GAMS trace summary file produced by \code{trace_report()} in \code{re_dir}
+File name of GAMS trace summary file produced by \code{\link[=report_trace]{report_trace()}} in \code{re_dir}
 }
 \keyword{datasets}

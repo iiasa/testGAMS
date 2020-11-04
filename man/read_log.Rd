@@ -7,12 +7,11 @@
 read_log(re_dir)
 }
 \arguments{
-\item{re_dir}{Redirection directory used for the \code{run()}.}
+\item{re_dir}{Redirection directory used for the \code{\link[=run]{run()}}.}
 }
 \value{
 Character vector holding lines in the read log file.
 }
 \description{
-Reads the lines from the GAMS log output file written during
-a  \code{run()}.
+Reads the lines from the GAMS log output file written during a \code{\link[=run]{run()}}.
 }

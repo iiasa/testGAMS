@@ -4,12 +4,13 @@
 \alias{write_lines}
 \title{Write lines to a file}
 \usage{
-write_lines(path, lines)
+write_lines(path, ...)
 }
 \arguments{
 \item{path}{Path of the file to create.}
 
-\item{lines}{Character vector of lines to write.}
+\item{...}{One or more character vectors of lines to write, NULLs are
+skipped.}
 }
 \description{
 Truncates or creates the file before writing.

@@ -16,7 +16,7 @@ List describing GDX content.
 }
 \description{
 Returns a list with information on the content of a GDX file. Uses
-\code{GDX_FILE_NAME} by default, which is the name used by \code{run()} to dump
-an end-of-execution GDX. When using this default, the \code{dir} argument
-should be set to the redirection directory used for the \code{run()}.
+\code{GDX_FILE_NAME} by default, which is the name used by \code{\link[=run]{run()}} to dump an
+end-of-execution GDX. When using this default, the \code{dir} argument should be
+set to the redirection directory used for the \code{\link[=run]{run()}}.
 }

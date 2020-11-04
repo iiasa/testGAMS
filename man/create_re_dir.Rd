@@ -11,14 +11,14 @@ re_dir Newly created uniquely named temporary directory.
 }
 \description{
 Create a temporary directory to where output files can be redirected for
-examination and later cleanup. Once the output files have been written
-to the redirection directory, apply any needed tests to them to examine
-their content. Thereafter, cleanup can be performed by deleting the
-directory and its content in one go, e.g. by using \code{fs::dir_delete()}.
+examination and later cleanup. Once the output files have been written to the
+redirection directory, apply any needed tests to them to examine their
+content. Thereafter, cleanup can be performed by deleting the directory and
+its content in one go, e.g. by using \code{\link[fs:delete]{fs::dir_delete()}}.
 }
 \details{
-You may wish to defer the cleanup to a cleanup handler such as \code{on.exit()}
-or \code{withr::defer()}. The \code{local_re_dir()} function does this for you.
+You may wish to defer the cleanup to a cleanup handler such as \code{\link[=on.exit]{on.exit()}} or
+\code{\link[withr:defer]{withr::defer()}}. The \code{\link[=local_re_dir]{local_re_dir()}} function does this for you.
 }
 \examples{
 re_dir <- create_re_dir()

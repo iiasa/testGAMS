@@ -11,16 +11,15 @@ set_sys_dir(gams_sys_dir)
 }
 \description{
 Set the GAMS installation to use for testing by specifying the system
-directory where the GAMS binaries and libraries are installed. There
-can be multiple GAMS versions installed, so this functions selects
-the GAMS version to test with. Specifically, the GDX libraries and
-GAMS compiler/interpreter located in the set GAMS system directory
-will be used by the functions in the testGAMS package.
+directory where the GAMS binaries and libraries are installed. There can be
+multiple GAMS versions installed, so this functions selects the GAMS version
+to test with. Specifically, the GDX libraries and GAMS compiler/interpreter
+located in the set GAMS system directory will be used by the functions in the
+testGAMS package.
 }
 \details{
-Internally, this function uses the \code{igdx()} function from the gdxrrw
-package via which GDX files are accessed. The currently-set system
-directory is returned by \code{get_sys_dir()}.
+Internally, this function uses \code{\link[gdxrrw:igdx]{gdxrrw::igdx()}} via which GDX files are
+accessed. The currently-set system directory is returned by \code{\link[=get_sys_dir]{get_sys_dir()}}.
 
 This function throws an error if the given directory cannot be set.
 }

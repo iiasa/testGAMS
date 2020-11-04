@@ -7,14 +7,14 @@
 local_re_dir(env = parent.frame())
 }
 \arguments{
-\item{env}{[\code{environment}: \code{parent.frame()}]\cr Attach cleanup handler to
-this environment, defaults to the calling environment.}
+\item{env}{Attach cleanup handler to this environment, defaults to the
+calling environment.}
 }
 \value{
 re_dir Newly created uniquely named temporary directory.
 }
 \description{
-Create a temporary directory via \code{create_re_dir()} with a cleanup handler
+Create a temporary directory via \code{\link[=create_re_dir]{create_re_dir()}} with a cleanup handler
 attached to the calling environment. Cleanup deletes the directory and its
-contents using \code{withr::defer()}.
+contents using \code{\link[withr:defer]{withr::defer()}}.
 }

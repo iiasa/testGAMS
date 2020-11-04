@@ -4,17 +4,18 @@
 \alias{write_lines_cleanup}
 \title{Write lines to a file with deferred cleanup}
 \usage{
-write_lines_cleanup(path, lines, env = parent.frame())
+write_lines_cleanup(path, ..., env = parent.frame())
 }
 \arguments{
 \item{path}{Path of the file to create.}
 
-\item{lines}{Character vector of lines to write.}
+\item{...}{One or more character vectors of lines to write, NULLs are
+skipped.}
 
-\item{env}{Environment to set \code{withr::defer()} cleanup on.}
+\item{env}{Environment to set \code{\link[withr:defer]{withr::defer()}} cleanup on.}
 }
 \description{
-Truncates or creates the file before writing, and sets deferred deletion
-of the file to occur when the specified environment is destroyed. By
-default, the invoking environment is set.
+Truncates or creates the file before writing, and sets deferred deletion of
+the file to occur when the specified environment is destroyed. By default,
+the invoking environment is set.
 }

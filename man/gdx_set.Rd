@@ -7,7 +7,7 @@
 gdx_set(info, name)
 }
 \arguments{
-\item{info}{Info list as returned by \code{gdx_info()}.}
+\item{info}{Info list as returned by \code{\link[=gdx_info]{gdx_info()}}.}
 
 \item{name}{Name of the set to read.}
 }

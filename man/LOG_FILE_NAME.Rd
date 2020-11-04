@@ -3,7 +3,7 @@
 \docType{data}
 \name{LOG_FILE_NAME}
 \alias{LOG_FILE_NAME}
-\title{File name of GANS log file produced by \code{run()} in \code{re_dir}}
+\title{File name of GAMS log file produced by \code{\link[=run]{run()}} in \code{re_dir}}
 \format{
 An object of class \code{character} of length 1.
 }
@@ -11,6 +11,6 @@ An object of class \code{character} of length 1.
 LOG_FILE_NAME
 }
 \description{
-File name of GANS log file produced by \code{run()} in \code{re_dir}
+File name of GAMS log file produced by \code{\link[=run]{run()}} in \code{re_dir}
 }
 \keyword{datasets}

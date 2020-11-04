@@ -5,11 +5,13 @@
 #' Truncates or creates the file before writing.
 #'
 #' @param path  Path of the file to create.
-#' @param lines Character vector of lines to write.
+#' @param ...   One or more character vectors of lines to write, NULLs are skipped.
 #' @export
-write_lines <- function(path, lines) {
+write_lines <- function(path, ...) {
   conn <- file(path, open="wt")
-  writeLines(lines, conn)
+  for (l in list(...)) {
+    if (!is.null(l)) writeLines(l, conn)
+  }
   close(conn)
 }
 
@@ -20,12 +22,14 @@ write_lines <- function(path, lines) {
 #' default, the invoking environment is set.
 #'
 #' @param path  Path of the file to create.
-#' @param lines Character vector of lines to write.
+#' @param ...   One or more character vectors of lines to write, NULLs are skipped.
 #' @param env   Environment to set `withr::defer()` cleanup on.
 #' @export
-write_lines_cleanup <- function(path, lines, env = parent.frame()) {
+write_lines_cleanup <- function(path, ..., env = parent.frame()) {
   conn <- file(path, open="wt")
   withr::defer(fs::file_delete(path), env = env)
-  writeLines(lines, conn)
+  for (l in list(...)) {
+    if (!is.null(l)) writeLines(l, conn)
+  }
   close(conn)
 }

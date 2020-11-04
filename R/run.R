@@ -23,6 +23,7 @@ TRACE_SUMMARY_FILE_NAME <- "trace.sum"
 TRACE_REPORT_FILE_NAME <- "trace.lst"
 
 PAR_FILE_NAME <- "parameters.txt"
+TRACE_LOG_FILE_NAME <- "trace.log"
 
 #' Run a GAMS script for testing
 #'
@@ -129,7 +130,9 @@ report_trace <- function(re_dir, trace_level = 0) {
   arg_templates = c(
     '"{TRACE_FILE_NAME}"',
     'action=GT',
-    'traceLevel={trace_level}'
+    'traceLevel={trace_level}',
+    'logOption=2', # Log to file (stdout)
+    'logFile="{fs::path(re_dir, TRACE_LOG_FILE_NAME)}"' # Path to log file
   )
   args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
 

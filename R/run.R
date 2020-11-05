@@ -1,3 +1,7 @@
+#' File name of GAMS parameter file used for a [run()] and written to `re_dir`
+#' @export
+PAR_FILE_NAME <- "parameters.txt"
+
 #' File name of GDX dump produced by [run()] in `re_dir`
 #' @export
 GDX_FILE_NAME <- "output.gdx"
@@ -14,6 +18,10 @@ LST_FILE_NAME <- "output.lst"
 #' @export
 TRACE_FILE_NAME <- "trace.txt"
 
+#' File name of GAMS trace log file produced by [report_trace()] in `re_dir`
+#' @export
+TRACE_LOG_FILE_NAME <- "trace.log"
+
 #' File name of GAMS trace summary file produced by [report_trace()] in `re_dir`
 #' @export
 TRACE_SUMMARY_FILE_NAME <- "trace.sum"
@@ -21,9 +29,6 @@ TRACE_SUMMARY_FILE_NAME <- "trace.sum"
 #' File name of GAMS trace report file produced by [report_trace()] in `re_dir`
 #' @export
 TRACE_REPORT_FILE_NAME <- "trace.lst"
-
-PAR_FILE_NAME <- "parameters.txt"
-TRACE_LOG_FILE_NAME <- "trace.log"
 
 #' Run a GAMS script for testing
 #'

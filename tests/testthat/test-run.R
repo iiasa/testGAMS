@@ -15,7 +15,7 @@ test_that("re_dir argument of run() is checked", {
   expect_error(run(script = script, re_dir = tmp_script)) # re_dir must be a directory
 })
 
-test_that("run() can run a GAMS script and produce output files", {
+test_that("run() can run a GAMS script and produces expected output files", {
   re_dir <- local_re_dir()
   script <- fs::path(re_dir, "test.gms")
   write_lines(script, 'display "Hello world!";')
@@ -24,6 +24,7 @@ test_that("run() can run a GAMS script and produce output files", {
   expect_true(fs::file_exists(fs::path(re_dir, GDX_FILE_NAME)))
   expect_true(fs::file_exists(fs::path(re_dir, LOG_FILE_NAME)))
   expect_true(fs::file_exists(fs::path(re_dir, LST_FILE_NAME)))
+  expect_true(fs::file_exists(fs::path(re_dir, REF_FILE_NAME)))
   expect_true(fs::file_exists(fs::path(re_dir, TRACE_FILE_NAME)))
 })
 
@@ -50,7 +51,7 @@ test_that("report_trace() works, produces expected output files, honors trace_le
   expect_equal(getwd(), prior_wd)
 })
 
-test_that("report_trace() can return an error code", {
+test_that("report_trace() can return a GAMS error code", {
   re_dir <- local_re_dir()
   script <- test_path("models", "transport.gms")
   code <- run(script, re_dir, "iterLim=0")

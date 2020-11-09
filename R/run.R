@@ -14,6 +14,10 @@ LOG_FILE_NAME <- "output.log"
 #' @export
 LST_FILE_NAME <- "output.lst"
 
+#' File name of GAMS reference file produced by [run()] in `re_dir`
+#' @export
+REF_FILE_NAME <- "output.ref"
+
 #' File name of GAMS trace file produced by [run()] in `re_dir`
 #' @export
 TRACE_FILE_NAME <- "trace.txt"
@@ -74,6 +78,7 @@ run <- function(script, re_dir, params = NULL) {
     'logFile="{fs::path(re_dir, LOG_FILE_NAME)}"', # Path to log file
     'output="{fs::path(re_dir, LST_FILE_NAME)}"', # Path to listing file
     'gdx="{fs::path(re_dir, GDX_FILE_NAME)}"', # Path to GDX file dumped at execution end
+    'reference="{fs::path(re_dir, REF_FILE_NAME)}"', # Path to reference file
     'trace="{fs::path(re_dir, TRACE_FILE_NAME)}"', # Path to trace file
     'pageContr=2', # No page control, no padding
     'pageSize=0', # Turn off paging

@@ -13,5 +13,5 @@ read_log(re_dir)
 Character vector holding lines in the read log file.
 }
 \description{
-Reads the lines from the GAMS log output file written during a \code{\link[=run]{run()}}.
+Reads the lines of the GAMS log output file written during a \code{\link[=run]{run()}}.
 }

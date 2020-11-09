@@ -13,5 +13,5 @@ read_lst(re_dir)
 Character vector holding lines in the read listing file.
 }
 \description{
-Reads the lines from the GAMS listing output file written during a \code{\link[=run]{run()}}.
+Reads the lines of the GAMS listing output file written during a \code{\link[=run]{run()}}.
 }

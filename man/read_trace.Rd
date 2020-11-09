@@ -13,5 +13,5 @@ read_trace(re_dir)
 Character vector holding lines in the read trace file.
 }
 \description{
-Reads the lines from the GAMS trace file written during a \code{\link[=run]{run()}}.
+Reads the lines of the GAMS trace file written during a \code{\link[=run]{run()}}.
 }

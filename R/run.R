@@ -37,10 +37,10 @@ TRACE_REPORT_FILE_NAME <- "trace.lst"
 #' Run a GAMS script for testing
 #'
 #' Run a GAMS script and captures output files for testing. The logging output,
-#' listing file, trace file, and a GDX dump of all symbols are redirected to
-#' files located in `re_dir` with names `LOG_FILE_NAME`, `LST_FILE_NAME`,
-#' `TRACE_FILE_NAME`, and `GDX_FILE_NAME` respectively. The default
-#' compile-and-execute action is used.
+#' listing file, reference file, trace file, and a GDX dump of all symbols are
+#' redirected to files located in `re_dir` with names `LOG_FILE_NAME`,
+#' `LST_FILE_NAME`, `REF_FILE_NAME`, `TRACE_FILE_NAME`, and `GDX_FILE_NAME`
+#' respectively. The default compile-and-execute action is used.
 #'
 #' Optionally, [GAMS
 #' parameters](https://www.gams.com/latest/docs/UG_GamsCall.html) can be

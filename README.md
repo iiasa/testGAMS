@@ -8,7 +8,7 @@ From an R or RStudio console, installing the **testGAMS** package is done as fol
 ```
 # Install the devtools package, if you have not done so already
 install.packages("devtools")
-# Install globiomvis development version from GitHub, it is not available on CRAN
+# Install testGAMS development version from GitHub, it is not available on CRAN
 devtools::install_github("iiasa/testGAMS")
 ```
 
@@ -16,3 +16,6 @@ This should also install all further required R packages other than [**gdxrrw**]
 
 ## Requirements
 In addition to the R packages listed in the `DESCRIPTION` file, a GAMS installation is required.
+
+## Automated testing
+Since GAMS tests require GAMS, online automated testing services such as TravisCI or GitHub Actions are not usable as they do not support GAMS. A local [Jenkins](https://www.jenkins.io/) deployment with access to a licensed GAMS installation is a good alternative. The **testGAMS** package itself is tested with Jenkins. See the `Jenkinsfile` and `Makefile` for an example of how this is done through a [Jenkins pipeline](https://www.jenkins.io/doc/book/pipeline/getting-started/). 

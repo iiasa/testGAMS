@@ -19,3 +19,5 @@ In addition to the R packages listed in the `DESCRIPTION` file, a GAMS installat
 
 ## Automated testing
 Since GAMS tests require GAMS, online automated testing services such as TravisCI or GitHub Actions are not usable as they do not support GAMS. A local [Jenkins](https://www.jenkins.io/) deployment with access to a licensed GAMS installation is a good alternative. The **testGAMS** package itself is tested with Jenkins. See the `Jenkinsfile` and `Makefile` for an example of how this is done through a [Jenkins pipeline](https://www.jenkins.io/doc/book/pipeline/getting-started/). 
+
+Note that the **testGAMS** self-tests use [JunitReporter](https://testthat.r-lib.org/reference/JunitReporter.html) to summarize the test results in JUnit XML format. This XML is ingested by the Jenkins [JUnit plugin](https://plugins.jenkins.io/junit) during the post stage of the Jenkins pipeline defined in the `Jenkinsfile` to produce a test report that is browsable via the Jenkins web interface. Such automated test reporting is very helpful, and a good reason for using **testthat** together with Jenkins.

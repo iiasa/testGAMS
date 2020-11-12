@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        CODECOV_TOKEN = credentials('codecov-token-for-testGAMS')
+    }
     stages {
         stage('Clean') {
             steps {
@@ -21,6 +24,7 @@ pipeline {
         success {
             sh 'make coverage'
             cobertura coberturaReportFile: 'cobertura.xml'
+            Rscript -e "covr::codecov()"
         }
         always {
             junit(

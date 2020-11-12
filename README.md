@@ -1,4 +1,9 @@
 # testGAMS
+
+<!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/github/iiasa/testGAMS/branch/master/graph/badge.svg)](https://codecov.io/github/iiasa/testGAMS?branch=master)
+<!-- badges: end -->
+
 The **testGAMS** R package serves to test [GAMS](https://www.gams.com/) code. It provides functions that manage GAMS invocation and output. These functions allow you to implement tests for GAMS in R. It is recommended to structure your tests using the [**testthat**](https://testthat.r-lib.org/) framework. This framework is used to test `testGAMS` itself. The self-tests, contained in the `tests/testthat` subdirectory, therefore also serve as examples of using **testGAMS** with **testthat**.
 
 ## Installation

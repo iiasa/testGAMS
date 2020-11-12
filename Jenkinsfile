@@ -24,7 +24,7 @@ pipeline {
         success {
             sh 'make coverage'
             cobertura coberturaReportFile: 'cobertura.xml'
-            Rscript -e "covr::codecov()"
+            sh 'Rscript -e "covr::codecov()"'
         }
         always {
             junit(

@@ -11,7 +11,13 @@
 #' @export
 gdx_info <- function(dir, name=GDX_FILE_NAME) {
   gdx_path <- fs::path(dir, name)
-  info <- gdxrrw::gdxInfo(fs::path(dir, name), dump=FALSE, returnList=TRUE, returnDF=FALSE)
+  info <-
+    gdxrrw::gdxInfo(
+      fs::path(dir, name),
+      dump = FALSE,
+      returnList = TRUE,
+      returnDF = FALSE
+    )
   info$path <- gdx_path
   info
 }
@@ -26,7 +32,18 @@ gdx_parameter <- function(info, name) {
   stopifnot('parameters' %in% names(info))
   stopifnot('path' %in% names(info))
   stopifnot(name %in% info$parameters)
-  tibble::as_tibble(gdxrrw::rgdx.param(info$path, name, names=NULL, compress=TRUE, ts=FALSE, squeeze=TRUE, useDomInfo=TRUE, check.names=TRUE))
+  tibble::as_tibble(
+    gdxrrw::rgdx.param(
+      info$path,
+      name,
+      names = NULL,
+      compress = TRUE,
+      ts = FALSE,
+      squeeze = TRUE,
+      useDomInfo = TRUE,
+      check.names = TRUE
+    )
+  )
 }
 
 #' Read a set from a GDX file
@@ -39,5 +56,14 @@ gdx_set <- function(info, name) {
   stopifnot('sets' %in% names(info))
   stopifnot('path' %in% names(info))
   stopifnot(name %in% info$sets)
-  gdxrrw::rgdx.set(info$path, name, names=NULL, compress=TRUE, ts=FALSE, useDomInfo=TRUE, check.names=TRUE, te=TRUE)
+  gdxrrw::rgdx.set(
+    info$path,
+    name,
+    names = NULL,
+    compress = TRUE,
+    ts = FALSE,
+    useDomInfo = TRUE,
+    check.names = TRUE,
+    te = TRUE
+  )
 }

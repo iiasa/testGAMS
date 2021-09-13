@@ -62,14 +62,11 @@ run <- function(script, re_dir, params = NULL) {
   re_dir <- fs::as_fs_path(re_dir)
   stopifnot(fs::dir_exists(re_dir))
 
-  # Extract the GAMS file name without extension from the path
-  name <- fs::path_ext_remove(fs::path_file(script))
-
   # Get path to GAMS binary (no exe extension needed)
   gams <- fs::path(get_sys_dir(), "gams")
 
   # Construct parameter file for GAMS (more robust than passing command line args)
-  param_templates = c(
+  param_templates <- c(
     'cErr=1', # Compile-time error limit: stop after 1 error
     'errMsg=1', # Explain error codes in listing file there where they occur
     'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
@@ -84,22 +81,22 @@ run <- function(script, re_dir, params = NULL) {
     'pageSize=0', # Turn off paging
     'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
   )
-  test_params <- purrr::map_chr(param_templates, stringr::str_glue, .envir=environment())
+  test_params <- purrr::map_chr(param_templates, stringr::str_glue, .envir = environment())
   par_file <- fs::path(re_dir, PAR_FILE_NAME)
   write_lines(par_file, test_params, params)
 
   # Construct command line arguments for GAMS
-  arg_templates = c(
+  arg_templates <- c(
     '"{script}"',
     'parmFile="{par_file}"'
   )
-  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
+  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir = environment())
 
   # Invoke GAMS
   # ignore stdout: is already redirected to the log file,
   # capture stderr: only used by GAMS when it crashes out
   # status attribute on return value is set on error
-  err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))
+  err <- suppressWarnings(system2(gams, args = args, stdout = FALSE, stderr = TRUE))
 
   # Extract and remove any status/error/return code
   code <- attr(err, "status")
@@ -138,19 +135,19 @@ report_trace <- function(re_dir, trace_level = 0) {
   gams <- fs::path(get_sys_dir(), "gams")
 
   # Construct command line arguments for GAMS
-  arg_templates = c(
+  arg_templates <- c(
     '"{TRACE_FILE_NAME}"',
     'action=GT',
     'traceLevel={trace_level}',
     'logOption=2', # Log to file (stdout)
     'logFile="{fs::path(re_dir, TRACE_LOG_FILE_NAME)}"' # Path to log file
   )
-  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir=environment())
+  args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir = environment())
 
   # Invoke GAMS
   # capture stderr: only used by GAMS when it crashes out
   # status attribute on return value is set on error
-  err <- suppressWarnings(system2(gams, args=args, stdout=FALSE, stderr=TRUE))
+  err <- suppressWarnings(system2(gams, args = args, stdout = FALSE, stderr = TRUE))
 
   # Extract and remove any status/error/return code
   code <- attr(err, "status")

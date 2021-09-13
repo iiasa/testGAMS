@@ -1,4 +1,4 @@
-test_lines = c("Line one.", "Line two.")
+test_lines <- c("Line one.", "Line two.")
 
 test_that("write_lines() and read_lines() work", {
   path <- tempfile()

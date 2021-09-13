@@ -20,8 +20,9 @@ set_sys_dir <- function(gams_sys_dir) {
   gams_sys_dir <- fs::as_fs_path(gams_sys_dir)
   stopifnot(fs::dir_exists(gams_sys_dir) | fs::link_exists(gams_sys_dir))
   # Set the directory via igdx and check if it was actually used.
-  result_sys_dir <- gdxrrw::igdx(gamsSysDir=gams_sys_dir, silent=TRUE , returnStr=TRUE)
-  if (result_sys_dir != gams_sys_dir) stop(stringr::str_glue("Could not set '{gams_sys_dir}' as GAMS system directory!"))
+  result_sys_dir <- gdxrrw::igdx(gamsSysDir = gams_sys_dir, silent = TRUE, returnStr = TRUE)
+  if (result_sys_dir != gams_sys_dir)
+    stop(stringr::str_glue("Could not set '{gams_sys_dir}' as GAMS system directory!"))
 }
 
 #' Get GAMS system directory

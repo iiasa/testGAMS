@@ -9,7 +9,7 @@
 #'   skipped.
 #' @export
 write_lines <- function(path, ...) {
-  conn <- file(path, open="wt")
+  conn <- file(path, open = "wt")
   for (l in list(...)) {
     if (!is.null(l)) writeLines(l, conn)
   }
@@ -28,7 +28,7 @@ write_lines <- function(path, ...) {
 #' @param env   Environment to set [withr::defer()] cleanup on.
 #' @export
 write_lines_cleanup <- function(path, ..., env = parent.frame()) {
-  conn <- file(path, open="wt")
+  conn <- file(path, open = "wt")
   withr::defer(fs::file_delete(path), env = env)
   for (l in list(...)) {
     if (!is.null(l)) writeLines(l, conn)

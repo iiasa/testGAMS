@@ -6,7 +6,7 @@
 #' @return Character vector holding lines in the read text file.
 #' @export
 read_lines <- function(path) {
-  conn <- file(path, open="rt")
+  conn <- file(path, open = "rt")
   lines <- readLines(conn)
   close(conn)
   lines
@@ -82,7 +82,8 @@ read_trace_log <- function(re_dir) {
 
 #' Read lines from trace report file
 #'
-#' Reads the lines of the GAMS trace report file written during [report_trace()].
+#' Reads the lines of the GAMS trace report file written during
+#' [report_trace()].
 #'
 #' @param  re_dir Redirection directory used for the [run()].
 #' @return Character vector holding lines in the read trace report file.
@@ -93,7 +94,8 @@ read_trace_report <- function(re_dir) {
 
 #' Read lines from trace summary file
 #'
-#' Reads the lines of the GAMS trace summary file written during [report_trace()].
+#' Reads the lines of the GAMS trace summary file written during
+#' [report_trace()].
 #'
 #' @param  re_dir Redirection directory used for the [run()].
 #' @return Character vector holding lines in the read trace summary file.

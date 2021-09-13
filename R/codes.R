@@ -4,26 +4,27 @@
 
 #' GAMS return code in case of normal completion
 #' @export
-GAMS_NORMAL_RETURN <- 0
+GAMS_NORMAL_RETURN <- 0 # nolint
 
 #' Error code returned by GAMS in case of a compilation error
 #' @export
-GAMS_COMPILATION_ERROR <- 2
+GAMS_COMPILATION_ERROR <- 2 # nolint
 
 #' Error code returned by GAMS in case of an execution error
 #' @export
-GAMS_EXECUTION_ERROR <- 3
+GAMS_EXECUTION_ERROR <- 3 # nolint
 
 #' Error code returned by GAMS in case of a file error
 #' @export
-GAMS_FILE_ERROR <- 5
+GAMS_FILE_ERROR <- 5 # nolint
 
 #' Error code returned by GAMS in case of a faulty parameter
 #' @export
-GAMS_PARAMETER_ERROR <- 6
+GAMS_PARAMETER_ERROR <- 6 # nolint
 
 # Define a list that maps status codes to their description
 # Taken from https://www.gams.com/32/docs/UG_GAMSReturnCodes.html#UG_GAMSReturnCodes_ListOfErrorCodes
+# nolint start
 CODE_DESCRIPTIONS <- list()
 CODE_DESCRIPTIONS[[1   ]] <- "Solver is to be called, the system should never return this number"
 CODE_DESCRIPTIONS[[2   ]] <- "There was a compilation error"
@@ -60,6 +61,7 @@ CODE_DESCRIPTIONS[[2000]] <- "Driver error: internal error: cannot install inter
 CODE_DESCRIPTIONS[[3000]] <- "Driver error: problems getting current directory"
 CODE_DESCRIPTIONS[[4000]] <- "Driver error: internal error: GAMS compile and execute module not found"
 CODE_DESCRIPTIONS[[5000]] <- "Driver error: internal error: cannot load option handling library"
+# nolint end
 
 describe_code <- function(code) {
   stopifnot(code >= 0)

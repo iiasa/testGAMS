@@ -29,8 +29,8 @@ gdx_info <- function(dir, name=GDX_FILE_NAME) {
 #' @return Tibble with parameter content.
 #' @export
 gdx_parameter <- function(info, name) {
-  stopifnot('parameters' %in% names(info))
-  stopifnot('path' %in% names(info))
+  stopifnot("parameters" %in% names(info))
+  stopifnot("path" %in% names(info))
   stopifnot(name %in% info$parameters)
   tibble::as_tibble(
     gdxrrw::rgdx.param(
@@ -53,8 +53,8 @@ gdx_parameter <- function(info, name) {
 #' @return List with set content.
 #' @export
 gdx_set <- function(info, name) {
-  stopifnot('sets' %in% names(info))
-  stopifnot('path' %in% names(info))
+  stopifnot("sets" %in% names(info))
+  stopifnot("path" %in% names(info))
   stopifnot(name %in% info$sets)
   gdxrrw::rgdx.set(
     info$path,

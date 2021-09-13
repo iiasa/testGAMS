@@ -1,38 +1,38 @@
 #' File name of GAMS parameter file used for a [run()] and written to `re_dir`
 #' @export
-PAR_FILE_NAME <- "parameters.txt"
+PAR_FILE_NAME <- "parameters.txt" # nolint
 
 #' File name of GDX dump produced by [run()] in `re_dir`
 #' @export
-GDX_FILE_NAME <- "output.gdx"
+GDX_FILE_NAME <- "output.gdx" # nolint
 
 #' File name of GAMS log file produced by [run()] in `re_dir`
 #' @export
-LOG_FILE_NAME <- "output.log"
+LOG_FILE_NAME <- "output.log" # nolint
 
 #' File name of GAMS listing file produced by [run()] in `re_dir`
 #' @export
-LST_FILE_NAME <- "output.lst"
+LST_FILE_NAME <- "output.lst" # nolint
 
 #' File name of GAMS reference file produced by [run()] in `re_dir`
 #' @export
-REF_FILE_NAME <- "output.ref"
+REF_FILE_NAME <- "output.ref" # nolint
 
 #' File name of GAMS trace file produced by [run()] in `re_dir`
 #' @export
-TRACE_FILE_NAME <- "trace.txt"
+TRACE_FILE_NAME <- "trace.txt" # nolint
 
 #' File name of GAMS trace log file produced by [report_trace()] in `re_dir`
 #' @export
-TRACE_LOG_FILE_NAME <- "trace.log"
+TRACE_LOG_FILE_NAME <- "trace.log" # nolint
 
 #' File name of GAMS trace summary file produced by [report_trace()] in `re_dir`
 #' @export
-TRACE_SUMMARY_FILE_NAME <- "trace.sum"
+TRACE_SUMMARY_FILE_NAME <- "trace.sum" # nolint
 
 #' File name of GAMS trace report file produced by [report_trace()] in `re_dir`
 #' @export
-TRACE_REPORT_FILE_NAME <- "trace.lst"
+TRACE_REPORT_FILE_NAME <- "trace.lst" # nolint
 
 #' Run a GAMS script for testing
 #'
@@ -67,19 +67,19 @@ run <- function(script, re_dir, params = NULL) {
 
   # Construct parameter file for GAMS (more robust than passing command line args)
   param_templates <- c(
-    'cErr=1', # Compile-time error limit: stop after 1 error
-    'errMsg=1', # Explain error codes in listing file there where they occur
-    'errorLog=1000', # Max number of lines for each error that will be written to log file, 0 = none
-    'logLine=0', # Minimize compile progress logging
-    'logOption=2', # Log to file (stdout)
+    "cErr=1", # Compile-time error limit: stop after 1 error
+    "errMsg=1", # Explain error codes in listing file there where they occur
+    "errorLog=1000", # Max number of lines for each error that will be written to log file, 0 = none
+    "logLine=0", # Minimize compile progress logging
+    "logOption=2", # Log to file (stdout)
     'logFile="{fs::path(re_dir, LOG_FILE_NAME)}"', # Path to log file
     'output="{fs::path(re_dir, LST_FILE_NAME)}"', # Path to listing file
     'gdx="{fs::path(re_dir, GDX_FILE_NAME)}"', # Path to GDX file dumped at execution end
     'reference="{fs::path(re_dir, REF_FILE_NAME)}"', # Path to reference file
     'trace="{fs::path(re_dir, TRACE_FILE_NAME)}"', # Path to trace file
-    'pageContr=2', # No page control, no padding
-    'pageSize=0', # Turn off paging
-    'pageWidth=32767' # Maximum allowed to avoid missing a grep on account of a line wrap
+    "pageContr=2", # No page control, no padding
+    "pageSize=0", # Turn off paging
+    "pageWidth=32767" # Maximum allowed to avoid missing a grep on account of a line wrap
   )
   test_params <- purrr::map_chr(param_templates, stringr::str_glue, .envir = environment())
   par_file <- fs::path(re_dir, PAR_FILE_NAME)
@@ -137,9 +137,9 @@ report_trace <- function(re_dir, trace_level = 0) {
   # Construct command line arguments for GAMS
   arg_templates <- c(
     '"{TRACE_FILE_NAME}"',
-    'action=GT',
-    'traceLevel={trace_level}',
-    'logOption=2', # Log to file (stdout)
+    "action=GT",
+    "traceLevel={trace_level}",
+    "logOption=2", # Log to file (stdout)
     'logFile="{fs::path(re_dir, TRACE_LOG_FILE_NAME)}"' # Path to log file
   )
   args <- purrr::map_chr(arg_templates, stringr::str_glue, .envir = environment())
